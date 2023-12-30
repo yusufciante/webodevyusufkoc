@@ -1,0 +1,52 @@
+﻿@model List<DoktorBrans>
+<div class="container">
+    <div class="row pt-3 pb-4"
+        <div>
+
+            <h1> Doktor Branşları  </h1>
+            </div>
+        </div>
+<table class="table table-bordered"
+    <thead> 
+<tr>
+    <th> 
+        Id
+        </th>
+        <th>
+            Doktor Branşı
+        </th>
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach(var DoktorBrans in Model){
+
+            <tr>
+            <td>@DoktorBrans.Id</td>
+           
+            <td>@DoktorBrans.Ad</td>
+            <td>
+           <a asp-controller="DoktorBrans" asp-action="Guncelle" asp-route-id="@DoktorBrans.Id" type="button" class="btn btn-success" style="width:250px">
+               Güncelle </a>
+               </td>
+               <td>
+                   <a asp-controller="DoktorBrans" asp-action="Sil" type="button" class="btn btn-danger" style="width: 250px">Sil</a>
+               </td>
+            </tr>
+            }
+        </tbody>
+     </table>
+     <div class="row pt-3 pb-2">
+         <div>
+             <a asp-controller="DoktorBrans"asp-action="Ekle" class ="btn btn-lg btn-primary" type="button">
+                 Yeni Branş Oluştur
+                 </a>
+         </div>
+
+
+</div>
