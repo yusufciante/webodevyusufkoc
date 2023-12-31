@@ -12,6 +12,7 @@ namespace hastanerandevu.Models
         {
             _uygulamaDbContext = uygulamaDbContext;
             this.dbSet = _uygulamaDbContext.Set<T>();
+            _uygulamaDbContext.Doktorlar.Include(k => k.DoktorBrans).Include(k => k.doktorBransId);
         }
 
         public void Ekle(T entity)
@@ -19,16 +20,32 @@ namespace hastanerandevu.Models
             dbSet.Add(entity);
         }
 
-        public T Get(Expression<Func<T, bool>> filtre)
+        public T Get(Expression<Func<T, bool>> filtre, string? includeProps = null)
         {
             IQueryable<T> sorgu = dbSet;
             sorgu = sorgu.Where(filtre);
+            if (!string.IsNullOrEmpty(includeProps))
+            {
+                foreach (var includeProp in includeProps.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    sorgu = sorgu.Include(includeProp);
+                }
+            }
             return sorgu.FirstOrDefault();
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(string? includeProps=null)
         {
             IQueryable<T> sorgu = dbSet;
+
+            if (!string.IsNullOrEmpty(includeProps))
+            {
+                foreach(var includeProp in includeProps.Split(new char[] {','},StringSplitOptions.RemoveEmptyEntries))
+                {
+                    sorgu = sorgu.Include(includeProp);
+                }
+            }
+
             return sorgu.ToList();
         }
 

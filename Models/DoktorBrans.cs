@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace hastanerandevu.Models
 {
     public class DoktorBrans

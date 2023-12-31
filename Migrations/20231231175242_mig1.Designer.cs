@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using hastanerandevu.Utility;
 
@@ -10,9 +11,11 @@ using hastanerandevu.Utility;
 namespace hastanerandevu.Migrations
 {
     [DbContext(typeof(UygulamaDbContext))]
-    partial class UygulamaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231231175242_mig1")]
+    partial class mig1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,27 +76,6 @@ namespace hastanerandevu.Migrations
                     b.ToTable("DoktorBranslari");
                 });
 
-            modelBuilder.Entity("hastanerandevu.Models.Randevu", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("DoktorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("HastaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoktorId");
-
-                    b.ToTable("Randevular");
-                });
-
             modelBuilder.Entity("hastanerandevu.Models.Doktor", b =>
                 {
                     b.HasOne("hastanerandevu.Models.DoktorBrans", "DoktorBrans")
@@ -103,17 +85,6 @@ namespace hastanerandevu.Migrations
                         .IsRequired();
 
                     b.Navigation("DoktorBrans");
-                });
-
-            modelBuilder.Entity("hastanerandevu.Models.Randevu", b =>
-                {
-                    b.HasOne("hastanerandevu.Models.Doktor", "Doktor")
-                        .WithMany()
-                        .HasForeignKey("DoktorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Doktor");
                 });
 #pragma warning restore 612, 618
         }
