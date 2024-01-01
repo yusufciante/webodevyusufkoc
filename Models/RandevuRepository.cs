@@ -1,6 +1,7 @@
-﻿using hastanerandevu.Utility;
+﻿using hospital.Utility;
+using hospital.Models;
 
-namespace hastanerandevu.Models
+namespace hospital.Models
 {
     public class RandevuRepository : Repository<Randevu>, IRandevuRepository
     {

@@ -1,12 +1,14 @@
-﻿using hastanerandevu.Models;
-using hastanerandevu.Utility;
+﻿using hospital.Models;
+using hospital.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 
-namespace hastanerandevu.Controllers
+namespace hospital.Controllers
 {
+    [Authorize(Roles = UserRoles.Role_Admin)]
     public class DoktorBransController : Controller
     {
 
@@ -19,7 +21,7 @@ namespace hastanerandevu.Controllers
         public IActionResult Index()
         {
             List<DoktorBrans> objDoktorBransList = _doktorBransRepository.GetAll().ToList();
-             return View(objDoktorBransList);
+            return View(objDoktorBransList);
         }
         public IActionResult Ekle()
         {
@@ -37,18 +39,22 @@ namespace hastanerandevu.Controllers
                 return RedirectToAction("Index", "DoktorBrans");
             }
             return View();
-    
+
         }
         public IActionResult Guncelle(int? id)
         {
-            if (id == null || id == 0) {
+            if (id == null || id == 0)
+            {
                 return NotFound();
             }
-            DoktorBrans doktorBransVt = _doktorBransRepository.Get(u=>u.Id==id);
-            if(doktorBransVt == null) { return NotFound(); }
-            return View(doktorBransVt);
+            DoktorBrans? doktorTuruVt = _doktorBransRepository.Get(u => u.Id == id);  // Expression<Func<T, bool>> filtre
+            if (doktorTuruVt == null)
+            {
+                return NotFound();
+            }
+            return View(doktorTuruVt);
         }
-        
+
         [HttpPost]
 
         public IActionResult Guncelle(DoktorBrans doktorBrans)
@@ -68,24 +74,24 @@ namespace hastanerandevu.Controllers
             {
                 return NotFound();
             }
-            DoktorBrans? doktorBransVt = _doktorBransRepository.Get(u=>u.Id==id);
+            DoktorBrans? doktorBransVt = _doktorBransRepository.Get(u => u.Id == id);
             if (doktorBransVt == null) { return NotFound(); }
             return View(doktorBransVt);
         }
-    
-    [HttpPost,ActionName("Sil")]
 
-    public IActionResult SilPOST(int? id)
-    {
-            DoktorBrans? doktorBrans = _doktorBransRepository.Get(u=>u.Id == id);
-            if(doktorBrans==null) 
-            { 
+        [HttpPost, ActionName("Sil")]
+
+        public IActionResult SilPOST(int? id)
+        {
+            DoktorBrans? doktorBrans = _doktorBransRepository.Get(u => u.Id == id);
+            if (doktorBrans == null)
+            {
                 return NotFound();
             }
             _doktorBransRepository.Sil(doktorBrans);
             _doktorBransRepository.Kaydet();
             TempData["basarili"] = "Başarıyla branş silindi gj mf";
-            return RedirectToAction("Index", "DoktorBrans"); 
+            return RedirectToAction("Index", "DoktorBrans");
         }
     }
 }

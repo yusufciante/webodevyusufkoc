@@ -1,6 +1,8 @@
-﻿namespace hastanerandevu.Models
+﻿
+
+namespace hospital.Models
 {
-    public interface IDoktorBransRepository: IRepository<DoktorBrans>
+    public interface IDoktorBransRepository : IRepository<DoktorBrans>
     {
         void Guncelle(DoktorBrans doktorBrans);
         void Kaydet();

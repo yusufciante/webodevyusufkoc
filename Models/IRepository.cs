@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace hastanerandevu.Models
+namespace hospital.Models
 {
     public interface IRepository<T> where T : class
     {
@@ -9,6 +9,6 @@ namespace hastanerandevu.Models
         void Ekle(T entity);
         void Sil(T entity);
         void SilAralik(IEnumerable<T> entities);
-            
+
     }
 }

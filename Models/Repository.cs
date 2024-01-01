@@ -1,8 +1,10 @@
-﻿using hastanerandevu.Utility;
+﻿using hospital.Utility;
+using hospital.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace hastanerandevu.Models
+namespace hospital.Models
 {
     public class Repository<T> : IRepository<T> where T : class
     {
@@ -34,13 +36,13 @@ namespace hastanerandevu.Models
             return sorgu.FirstOrDefault();
         }
 
-        public IEnumerable<T> GetAll(string? includeProps=null)
+        public IEnumerable<T> GetAll(string? includeProps = null)
         {
             IQueryable<T> sorgu = dbSet;
 
             if (!string.IsNullOrEmpty(includeProps))
             {
-                foreach(var includeProp in includeProps.Split(new char[] {','},StringSplitOptions.RemoveEmptyEntries))
+                foreach (var includeProp in includeProps.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     sorgu = sorgu.Include(includeProp);
                 }

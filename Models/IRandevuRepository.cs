@@ -1,6 +1,6 @@
-﻿namespace hastanerandevu.Models
+﻿namespace hospital.Models
 {
-    public interface IRandevuRepository: IRepository<Randevu>
+    public interface IRandevuRepository : IRepository<Randevu>
     {
         void Guncelle(Randevu randevu);
         void Kaydet();

@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+﻿using hospital.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace hastanerandevu.Models
+namespace hospital.Models
 {
     public class Randevu
     {
@@ -13,7 +14,7 @@ namespace hastanerandevu.Models
         public int HastaId { get; set; }
 
         [ValidateNever]
-         public int DoktorId { get; set; }
+        public int DoktorId { get; set; }
         [ForeignKey("DoktorId")]
 
 
