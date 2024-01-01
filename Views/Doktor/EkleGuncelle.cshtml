@@ -1,0 +1,80 @@
+﻿<h2>Yeni Doktor Ekle</h2>
+@model Doktor
+<form method="post" enctype="multipart/form-data">
+    <input asp-for="ResimUrl" hidden />
+    <div class="row">
+        <div class="col-10">
+            <div class="border p-3 mt-5">
+                <div class="row pb-3">
+
+
+                    <h2 class="text-primary">@(Model == null ? "Doktor Ekle" : "Doktor Güncelle") </h2>
+                    </hr>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="DoktorAdi" class="p-0"> </label>
+                    <input asp-for="DoktorAdi" class="form-control" />
+                    <span asp-validation-for="DoktorAdi" class="text-danger"></span>
+
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Poliklinik" class="p-0"> </label>
+                    <input asp-for="Poliklinik" class="form-control" />
+                    <span asp-validation-for="Poliklinik" class="text-danger"></span>
+
+                </div>
+                <div class="mb-3">
+                    <label asp-for="doktorBransId" class="p-0"> </label>
+                    <select asp-for="doktorBransId" asp-items="ViewBag.DoktorBransiList" class="form-select">
+                    </select>
+
+
+                </div>
+                <div class="mb-3">
+                    <label asp-for="DoktorMesai" class="p-0"> </label>
+                    <input asp-for="DoktorMesai" class="form-control" />
+                    <span asp-validation-for="DoktorMesai" class="text-danger"></span>
+
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ResimUrl" class="p-0"> </label>
+                    <input type="file" name="file" class="form-control" />
+
+
+                </div>
+                @if (Model != null)
+                {
+                    <button type="submit" class="btn btn-lg btn-primary" style="width:250px">Guncelle</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-lg btn-primary" style="width:250px">Doktor Ekle</button>
+                }
+                <a asp-controller="Doktor" asp-action="Index" class="btn btn-lg btn-primary style="width:250px">
+                    Doktorlara Geri Dön
+                </a>
+
+
+            </div>
+        </div>
+        <div class="col-2">
+            @if (Model != null)
+            {
+                <img src="@Model.ResimUrl" width="100%"
+                     style="border-radius:7px;border:1px solid #bbb9d9" />
+            }
+
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+</form>
+

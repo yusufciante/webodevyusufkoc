@@ -1,11 +1,20 @@
-﻿using hastanerandevu.Models;
+﻿using hospital.Models;
 using Microsoft.EntityFrameworkCore;
-namespace hastanerandevu.Utility
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
+namespace hospital.Utility
+// veritabanında EF tablo oluşturması için ilgili model sınıflarınızı buraya eklemelisiniz
 {
-    public class UygulamaDbContext : DbContext
+    public class UygulamaDbContext : IdentityDbContext
     {
         public UygulamaDbContext(DbContextOptions<UygulamaDbContext> options) : base(options) { }
 
         public DbSet<DoktorBrans> DoktorBranslari { get; set; }
+
+        public DbSet<Randevu> Randevular { get; set; }
+        public DbSet<Doktor> Doktorlar { get; set; }
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
     }
 }

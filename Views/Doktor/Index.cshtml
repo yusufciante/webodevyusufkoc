@@ -1,0 +1,84 @@
+﻿@model List<Doktor>
+@using hospital.Utility;
+@if (TempData["basarili"] != null)
+{
+    <h2>@TempData["basarili"] </h2>
+}
+
+<div class="container">
+    <div class="row pt-3 pb-4"
+        <div>
+
+            <h1> Doktorlar  </h1>
+            </div>
+        </div>
+    <table class="table table-bordered"
+    <thead>
+<tr>
+    <th>
+        Id
+        </th>
+        <th>
+            DoktorAdi
+        </th>
+         <th>
+            Poliklinik
+        </th>
+         <th>
+            DoktorMesai
+        </th>
+        <th>
+            Bransi
+        </th>
+        <th>
+            DoktorBrans
+        </th>
+        @if(User.IsInRole(UserRoles.Role_Admin))
+                {
+                    
+                        <th>
+                        </th>
+                  
+
+                }
+                @if (User.IsInRole(UserRoles.Role_Hasta))
+                {
+                    if (TempData["basarili1"] != null)
+                    {
+                <h2 style="color:forestgreen">@TempData["basarili1"]</h2>
+                    }
+                }
+
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var doktor in Model)
+            {
+                <tr>
+                <td>@doktor.Id</td>
+                <td>@doktor.DoktorAdi</td>
+                <td>@doktor.Poliklinik</td>
+                 <td>@doktor.DoktorMesai</td>
+                 <td>@doktor.DoktorBrans.Ad</td>
+                 <td> </td>                   
+                         @if (User.IsInRole(UserRoles.Role_Hasta))
+                        {
+                                <td align="center" valign="middle">
+                                <a asp-controller="Randevu" asp-action="RandevuAl" asp-route-id="@doktor.Id" type="button" class="btn btn-success btn-sm"></a>
+                                </td>
+                        }
+                        @if (User.IsInRole(UserRoles.Role_Admin))
+                        {
+                                <td align="center" valign="middle">
+                                    <a asp-controller="Doktor" asp-action="EkleGuncelle" asp-route-id="@doktor.Id" type="button" class="btn btn-success" style="width:250px">Güncelle</a>
+                                </td>
+                                <td align="center" valign="middle">
+                                    <a asp-controller="Doktor" asp-action="Sil" asp-route-id="@doktor.Id" type="button" class="btn btn-danger" style="width:250px">Sil</a>
+                                </td>
+                        }  
+                </tr>
+            }
+        </tbody>
+     </table>  
+ 
+    </div>

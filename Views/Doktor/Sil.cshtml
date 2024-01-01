@@ -1,0 +1,36 @@
+﻿<h2>Doktor Sil</h2>
+@model Doktor
+<form method="post">
+    <div class="border p-3 mt-5">
+        <div class="row pb-3">
+            <h2 class="text-primary">Doktor Sil</h2>
+            </hr>
+        </div>
+        <div class="mb-3">
+            <label asp-for="DoktorAdi" class="p-0"> </label>
+            <input asp-for="DoktorAdi" disabled class="form-control" />
+
+        </div>
+        <div class="mb-3">
+            <label asp-for="Poliklinik" class="p-0"> </label>
+            <input asp-for="Poliklinik" class="form-control" />
+
+
+        </div>
+        <div class="mb-3">
+            <label asp-for="DoktorMesai" class="p-0"> </label>
+            <input asp-for="DoktorMesai" class="form-control" />
+            <span asp-validation-for="DoktorMesai" disabled class="form-control" />
+
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary" style="width:250px">Doktor Sil</button>
+
+        <a asp-controller="Doktor" asp-action="Index" class="btn btn-lg btn-primary style="width:250px">
+            Doktorlara Geri Dön
+        </a>
+
+
+    </div>
+
+</form>
+
